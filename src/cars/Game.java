@@ -1,14 +1,17 @@
 package cars;
 
+import java.util.List;
 import java.util.Random;
 
 public class Game implements Runnable {
-    int loopNumber;
-    Auto auto;
+    private int loopNumber;
+    private Auto auto;
+    private List<ResultInfo> resultInfoList;
 
-    public Game(int loopNumber, Auto auto) {
+    public Game(int loopNumber, Auto auto, List<ResultInfo> resultInfoList) {
         this.loopNumber = loopNumber;
         this.auto = auto;
+        this.resultInfoList = resultInfoList;
     }
 
     @Override
@@ -44,7 +47,11 @@ public class Game implements Runnable {
             if(pitStopTime > 0) {
                 System.out.println("Car " + auto.getName() + " pitStop after loop number: " + (i) + ", Pit stop time: " + pitStopTime);
             }
+
         }
+//        ResultInfo resultInfo = new ResultInfo(auto.getName(), totalTime);
+//        resultInfoList.add(resultInfo);
+
 
         System.out.println(" ============ FINISH ============= ");
         System.out.println("The race is finished! Please, see the results of the race for " + auto.getName());
@@ -56,5 +63,9 @@ public class Game implements Runnable {
         System.out.println();
         System.out.println("Total time of the race including pit stops: " + (totalTime + totalPitStopTime));
         System.out.println(" ============ THE END ============= ");
+
+        ResultInfo resultInfo = new ResultInfo(auto.getName(), totalTime);
+        resultInfoList.add(resultInfo);
+
     }
 }
