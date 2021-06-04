@@ -2,6 +2,7 @@ package cars;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
@@ -23,17 +24,23 @@ public class Main {
         car2.join();
         car3.join();
 
-//        System.out.println("THE SIZE:" +resultInfoList.size());
-
         for (ResultInfo resultInfo : resultInfoList) {
             System.out.println("Car " + resultInfo.getName() + " total time: " + resultInfo.getResultTime());
         }
         System.out.println("--- end ---");
 
 
-
+        Comparator<ResultInfo> resComparator = new Comparator<ResultInfo>() {
+            @Override
+            public int compare(ResultInfo o1, ResultInfo o2) {
+                return (int) (o2.getResultTime()- o1.getResultTime());
+            }
+        };
+        resultInfoList.sort(resComparator);
+        System.out.println("The champion of today's race is " + resultInfoList.get(0).getName());
 
 
 
     }
+
 }
